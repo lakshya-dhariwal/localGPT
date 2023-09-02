@@ -1,4 +1,4 @@
-import { capitilize } from "@src/lib/util";
+import { capitalizeFirstLetter } from "@src/lib/util";
 import { ChatCompletionResponseMessageRoleEnum } from "openai";
 import { useCallback, ChangeEvent, useState, FormEvent } from "react";
 import { IconButton } from "../IconButton";
@@ -106,7 +106,7 @@ export function ChatInput({
         >
           {roleOptions.map((role) => (
             <option key={role} value={role}>
-              {capitilize(role)}
+              {capitalizeFirstLetter(role)}
             </option>
           ))}
         </select>

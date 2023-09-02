@@ -10,7 +10,7 @@ import {
   FiSave,
   FiFlag,
 } from "react-icons/fi";
-import { capitilize } from "@src/lib/util";
+import { capitalizeFirstLetter } from "@src/lib/util";
 import classNames from "classnames";
 
 export type ChatMessageProps = {
@@ -43,7 +43,7 @@ export function ChatMessage({
     "text-sm"
   );
 
-  const nameDisplay = role === "user" ? "You" : capitilize(role);
+  const nameDisplay = role === "user" ? "You" : capitalizeFirstLetter(role);
 
   useEffect(() => {
     setEditedContent(content);
@@ -51,7 +51,7 @@ export function ChatMessage({
 
   return (
     <div className="group relative mb-4 flex flex-col border-b-2 border-mirage-700 pb-2">
-      <div className="pointer-events-none absolute top-0 right-0 flex flex-row opacity-0 group-focus-within:pointer-events-auto group-focus-within:opacity-100 group-hover:pointer-events-auto group-hover:opacity-100">
+      <div className="pointer-events-none absolute right-0 top-0 flex flex-row opacity-0 group-focus-within:pointer-events-auto group-focus-within:opacity-100 group-hover:pointer-events-auto group-hover:opacity-100">
         {isEditing ? (
           <IconButton
             className="ml-2"

@@ -81,7 +81,7 @@ export function ChatSelectionButton({
       "transition-colors focus-within:bg-mirage-600 hover:bg-mirage-600 active:bg-mirage-700":
         !active,
     },
-    " p-2 rounded-lg my-1 transition-colors relative"
+    " p-2 rounded-lg my-1 transition-colors relative pl-3 mb-[20px] bg-[#32333E] mx-1"
   );
 
   const handleClick = () => {
@@ -143,14 +143,15 @@ export function ChatSelectionButton({
         </button>
       )}
       {active && (
-        <div className="absolute right-0 top-0 flex h-full flex-row justify-center">
+        <div className="absolute right-0 top-0 flex h-full flex-row justify-center p-1">
           {!isEditing && (
-            <IconButton onClick={handleDelete} aria-label="Deleete Chat">
+            <IconButton onClick={handleDelete} aria-label="Delete Chat">
               <FiTrash />
             </IconButton>
           )}
           <IconButton
             onClick={isEditing ? handleSave : handleEdit}
+            className=""
             aria-label="Edit Chat Description"
           >
             {isEditing ? <FiCheck /> : <FiEdit />}
@@ -197,7 +198,7 @@ export function ChatSelection() {
         >
           New Chat
         </button>
-        <div className="h-[50vh] ">
+        <div className="my-3 h-[50vh] overflow-y-scroll">
           {Object.entries(chats).map(([id, chat]) => {
             return (
               <ChatSelectionButton
