@@ -41,6 +41,7 @@ module.exports = {
     "linebreak-style": ["error", "unix"],
     quotes: ["error", "double"],
     semi: ["error", "always"],
+    "react/prop-types": "off",
     "react/react-in-jsx-scope": "off",
     "import/default": "off",
     "import/no-default-export": "error",
