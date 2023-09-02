@@ -3,7 +3,7 @@ import { useAppDispatch, useAppSelector } from "./lib/hooks/redux";
 import { useEffect, useState } from "react";
 import { SideBar } from "./components/SideBar";
 import { createChat, switchChat } from "./features/chat";
-import { NavBar } from "./components/Navbar";
+import { NavBar } from "./components/NavBar";
 
 function App() {
   const state = useAppSelector((state) => state);
