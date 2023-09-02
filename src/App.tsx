@@ -1,8 +1,9 @@
 import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "./lib/hooks/redux";
 import { useEffect, useState } from "react";
-import { SideBar } from "./components/Sidebar";
+import { SideBar } from "./components/SideBar";
 import { createChat, switchChat } from "./features/chat";
+import { NavBar } from "./components/Navbar";
 
 function App() {
   const state = useAppSelector((state) => state);
@@ -36,8 +37,9 @@ function App() {
 
   return (
     <div className="app">
+      <NavBar />
       <SideBar />
-      <main className="overflow-hidden">
+      <main className="mt-[55px] overflow-hidden">
         <Outlet />
       </main>
     </div>
