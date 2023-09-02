@@ -4,6 +4,7 @@ import { FiX, FiMenu, FiSettings } from "react-icons/fi";
 import { Link } from "react-router-dom";
 import { ChatSelection } from "./ChatSelection";
 import { IconButton } from "./IconButton";
+import { LogoIcon } from "../assets/LogoIcon";
 
 export function SideBar() {
   const [isOpen, setIsOpen] = useState(true);
@@ -28,8 +29,11 @@ export function SideBar() {
         </IconButton>
       </div>
       <aside className={classes}>
-        <div className="w-full">
-          <img src='./logo.png'/>
+        <div className="flex w-full items-center justify-center bg-[#303032] p-5">
+          <LogoIcon fill="#97B34D" h={30} w={30} />{" "}
+          <h1 className="ml-2 text-3xl font-semibold ">
+            Local<span className="text-[#97B34D]">GPT</span>
+          </h1>
         </div>
         <div className="flex h-full flex-col px-2 pt-14">
           <div className="flex-1 basis-full overflow-y-auto">
