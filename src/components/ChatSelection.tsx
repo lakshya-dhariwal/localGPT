@@ -8,7 +8,7 @@ import {
 import { useAppDispatch, useAppSelector } from "@src/lib/hooks/redux";
 import classNames from "classnames";
 import { IconButton } from "./IconButton";
-import { FiCheck, FiEdit, FiTrash } from "react-icons/fi";
+import { FiCheck, FiEdit, FiTrash, FiPlus } from "react-icons/fi";
 import { memo, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { localConfirm } from "@src/lib/util";
 
@@ -189,34 +189,36 @@ export function ChatSelection() {
 
   return (
     <div className="sticky top-0 flex flex-col">
-      <div className="border-b-2 border-mirage-700">
-        <ChatSelectionButton
-          summary={"Create new chat"}
-          active={false}
+      <div className="flex flex-col border-b-[1px] border-gray-500 pb-3">
+        <button
           id={"new"}
           onClick={handleCreateChat}
-        />
-        <ChatSelectionButton
-          summary={"Delete all Chats"}
-          active={false}
+          className="mx-auto mb-[10px] flex h-12 w-full items-center  justify-center rounded-lg border border-[#888888] font-semibold text-mirage-200 transition-colors duration-200 hover:bg-gray-500/10 "
+        >
+          New Chat
+        </button>
+        <div className="h-[50vh] ">
+          {Object.entries(chats).map(([id, chat]) => {
+            return (
+              <ChatSelectionButton
+                summary={chat.summary}
+                active={id === activeChatId}
+                id={id}
+                onClick={handleSwitchChat}
+                onDelete={handleDeleteChat}
+                onEdit={handleEditChat}
+                key={id}
+              />
+            );
+          })}
+        </div>
+        <button
           id={"delete"}
           onClick={handleClearChats}
-        />
-      </div>
-      <div className="border-b-2 border-mirage-700">
-        {Object.entries(chats).map(([id, chat]) => {
-          return (
-            <ChatSelectionButton
-              summary={chat.summary}
-              active={id === activeChatId}
-              id={id}
-              onClick={handleSwitchChat}
-              onDelete={handleDeleteChat}
-              onEdit={handleEditChat}
-              key={id}
-            />
-          );
-        })}
+          className="mx-auto mb-[10px] h-12 w-full items-center justify-center  rounded-lg border border-[#EC4F3C] font-semibold text-[#EC4F3C]"
+        >
+          Clear Chats
+        </button>
       </div>
     </div>
   );
