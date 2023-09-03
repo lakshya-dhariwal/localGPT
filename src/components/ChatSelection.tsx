@@ -22,7 +22,7 @@ const ChatSummaryText = memo(({ summary }: ChatSummaryTextProps) => {
   const prevSummary = useRef(summary);
   // Type the new summary into the text
   useEffect(() => {
-    let interval: NodeJS.Timer | null = null;
+    let interval: NodeJS.Timeout | null = null;
     if (prevSummary.current === summary) {
       return;
     }
