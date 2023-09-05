@@ -6,7 +6,7 @@ import { ChatSelection } from "./ChatSelection";
 import { IconButton } from "./IconButton";
 import { LogoIcon } from "../assets/LogoIcon";
 
-export function SideBar() {
+export function ChatSideBar() {
   const [isOpen, setIsOpen] = useState(true);
 
   const classes = classNames(
@@ -19,13 +19,13 @@ export function SideBar() {
 
   return (
     <>
-      <div className="fixed left-0 top-0 z-50 p-2">
+      <div className="fixed left-0 top-0 z-30 p-2">
         <IconButton
           onClick={() => setIsOpen(!isOpen)}
           className=" p-2"
           aria-label={`${isOpen ? "Close" : "Open"} side menu`}
         >
-          {isOpen ? <FiX size={20} /> : <FiMenu size={20} />}
+          {isOpen ? <FiX size={20} /> : <FiMenu fill="white" size={20} />}
         </IconButton>
       </div>
       <aside className={classes}>

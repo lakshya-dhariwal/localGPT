@@ -1,7 +1,7 @@
 import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "./lib/hooks/redux";
 import { useEffect, useState } from "react";
-import { SideBar } from "./components/SideBar";
+import { ChatSideBar } from "./components/ChatSideBar";
 import { createChat, switchChat } from "./features/chat";
 import { NavBar } from "./components/NavBar";
 
@@ -38,7 +38,7 @@ function App() {
   return (
     <div className="app">
       <NavBar />
-      <SideBar />
+      <ChatSideBar />
       <main className="mt-[55px] overflow-hidden">
         <Outlet />
       </main>

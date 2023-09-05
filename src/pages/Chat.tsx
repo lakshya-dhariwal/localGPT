@@ -21,5 +21,9 @@ export function ChatPage() {
     return <Navigate to={"/"} />;
   }
 
-  return <ChatView chat={chat} />;
+  return (
+    <>
+      <ChatView chat={chat} />
+    </>
+  );
 }

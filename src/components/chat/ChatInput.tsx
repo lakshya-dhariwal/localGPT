@@ -101,7 +101,7 @@ export function ChatInput({
           name="chat-role"
           id="chat-role"
           value={sendAsRole}
-          className="rounded-md rounded-b-none bg-mirage-700 p-1"
+          className="text-m rounded-md rounded-b-none bg-[#97B34D] p-1 font-semibold text-mirage-600"
           onChange={handleSendAsRoleChange}
         >
           {roleOptions.map((role) => (
@@ -111,11 +111,11 @@ export function ChatInput({
           ))}
         </select>
       </div>
-      <div className="pointer-events-auto flex w-full flex-row ">
+      <div className="pointer-events-auto relative flex  h-fit w-full max-w-4xl flex-grow flex-row  items-center justify-center rounded-md rounded-tl-none  border border-black/10 bg-white shadow-[0_0_10px_rgba(0,0,0,0.10)] dark:border-gray-900/50 dark:text-white dark:shadow-[0_0_15px_rgba(0,0,0,0.10)] ">
         <textarea
           name="chat-input"
           id="chat-input"
-          className="w-full resize-none rounded-md rounded-tl-none bg-mirage-700 p-1 shadow-sm"
+          className="z-10  flex h-full w-full  resize-none items-center border-0 bg-transparent py-3 pl-5 text-[#343541] dark:bg-transparent"
           value={draft}
           onChange={handleDraftChange}
           onKeyDown={handleKeyDown}
@@ -128,21 +128,15 @@ export function ChatInput({
           }}
           rows={1}
         ></textarea>
-        <div className="">
+        <div className="flex h-full items-center justify-center bg-[#97B34D] px-2">
           <IconButton
             disabled={disabled}
             aria-label="Send Message"
-            className="ml-2 !bg-green-700 shadow-sm hover:!bg-green-600 active:!bg-green-800"
+            className={`text- m-0 ml-2 flex h-full items-center justify-center bg-transparent p-0 shadow-sm hover:bg-transparent ${
+              disabled && "pointer-events-none cursor-not-allowed"
+            }`}
           >
-            {disabled ? (
-              <div className="flex flex-row items-center">
-                <div className="anim h-1 w-1 rounded-full bg-green-500"></div>
-                <div className="ml-1 h-1 w-1 rounded-full bg-green-500"></div>
-                <div className="ml-1 h-1 w-1 rounded-full bg-green-500"></div>
-              </div>
-            ) : (
-              <FiSend size={20} />
-            )}
+            <FiSend size={20} />
           </IconButton>
         </div>
       </div>
