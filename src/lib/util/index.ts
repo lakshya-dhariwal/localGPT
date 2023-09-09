@@ -1,3 +1,5 @@
+import { shell } from "electron";
+
 export function capitalizeFirstLetter(str: string) {
   return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
 }
@@ -15,4 +17,8 @@ export const localConfirm = async (message: string): Promise<boolean> => {
 
 export function findObjectById(id: string, array: any[]) {
   return array?.find((obj) => obj.id === id);
+}
+
+export function downloadFileInBrowser(url?: string) {
+  if (url) shell.openExternal(url); // Opens the URL in the user's default browser
 }
