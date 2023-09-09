@@ -32,7 +32,7 @@ export function ChatSideBar() {
         <div className="flex w-full items-center justify-center bg-[#303032] p-5">
           <LogoIcon fill="#97B34D" h={30} w={30} />{" "}
           <h1 className="ml-2 text-3xl font-semibold ">
-            Local<span className="text-[#97B34D]">GPT</span>
+            Local<span className="text-brand">GPT</span>
           </h1>
         </div>
         <div className="flex h-full flex-col px-2 pt-14">

@@ -1,10 +1,24 @@
-export const MODELS = [
+import { IModel } from "@src/types";
+
+export const MODELS : IModel[] = [
   {
     requiredRAM: "7",
     name: "Llama 7B",
     id: "Llama-7B",
     description:
       "The Llama 7B model is a large language model (LLM) developed by Meta AI. It has 7 billion parameters, which is smaller than other LLMs such as GPT-3, but it is still capable of generating text, translating languages, writing different kinds of creative content, and answering your questions in an informative way.",
+    downloadURL:
+      "https://huggingface.co/TheBloke/Llama-2-7B-GGML/resolve/main/llama-2-7b.ggmlv3.q4_1.bin",
+    fileSize: "4",
+    image:
+      "https://www.google.com/url?sa=i&url=https%3A%2F%2Fcommons.wikimedia.org%2Fwiki%2FFile%3AMeta-Logo.png&psig=AOvVaw1lvBV3uEI20GHYpi7Mki2G&ust=1694033895184000&source=images&cd=vfe&opi=89978449&ved=0CBAQjRxqFwoTCID6y7aulIEDFQAAAAAdAAAAABAJ",
+  },
+  {
+    requiredRAM: "13",
+    name: "Llama 13B",
+    id: "Llama-13B",
+    description:
+      "The Llama 13B model is a large language model (LLM) developed by Meta AI. It has 7 billion parameters, which is smaller than other LLMs such as GPT-3, but it is still capable of generating text, translating languages, writing different kinds of creative content, and answering your questions in an informative way.",
     downloadURL:
       "https://huggingface.co/TheBloke/Llama-2-7B-GGML/resolve/main/llama-2-7b.ggmlv3.q4_1.bin",
     fileSize: "4",
@@ -35,19 +49,5 @@ export const MODELS = [
     id: "scarlett",
     image:
       "https://firebasestorage.googleapis.com/v0/b/freedom-gpt.appspot.com/o/000freedomgpt_models%2Fscarlet.png?alt=media&token=dace8ba3-bf88-43d8-8ceb-6f379e42c1df",
-    model: "scarlett",
-  },
-  {
-    fileSize: "X",
-    image:
-      "https://firebasestorage.googleapis.com/v0/b/freedom-gpt.appspot.com/o/000freedomgpt_models%2Fliberty.png?alt=media&token=03541774-0e50-4626-88dd-08a66092ad4e",
-    id: "own-model",
-    tags: ["own-model"],
-    model: "own-model",
-    requiredRAM: "X",
-    name: "Any GGML format Model",
-    description:
-      "You can download and use any GGML-format model. Once you download it, you can select the model here",
-    downloadURL: null,
   },
 ];

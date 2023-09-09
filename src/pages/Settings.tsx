@@ -2,6 +2,7 @@ import { useAppDispatch, useAppSelector } from "@src/lib/hooks/redux";
 import classNames from "classnames";
 import { useNavigate } from "react-router-dom";
 import { FiChevronLeft } from "react-icons/fi";
+import { HiDownload } from "react-icons/hi";
 import { IconButton } from "../components/IconButton";
 import { Button } from "@src/components/Button";
 import {
@@ -13,6 +14,9 @@ import {
 } from "@src/features/settings";
 import { createToast } from "@src/features/toasts/thunks";
 import { CHATGPT_MODELS, ChatGPTModel } from "@src/lib/constants/openai";
+import { MODELS } from "@src/lib/constants/models";
+import { ModelCard } from "@src/components/ModelCard";
+
 type SettingItemProps = {
   label?: string;
   labelFor?: string;
@@ -112,7 +116,7 @@ export function SettingsPage() {
   };
 
   return (
-    <div className="m-auto max-w-md py-4 px-4">
+    <div className="m-auto max-w-3xl px-4 py-4">
       <div className="relative">
         <IconButton
           onClick={() => {
@@ -125,42 +129,37 @@ export function SettingsPage() {
         </IconButton>
         <h1 className="mb-4 text-2xl">Settings</h1>
       </div>
-
-      <form onSubmit={handleSubmit}>
-        <SettingItem label="OpenAI API Key" labelFor="apiKey">
+      <div className="mb-5">
+        <h2>Download Model:</h2>
+        <div className="mt-1 grid grid-cols-1 gap-2 lg:grid-cols-2">
+          {MODELS.map((model) => (
+            <ModelCard key={model.id} {...model} />
+          ))}
+        </div>
+      </div>
+      <form onSubmit={handleSubmit} className="mx-auto">
+        <SettingItem
+          label="Model file location"
+          labelFor="modelLocation"
+          help={<p>Set the downloaded model file local location here</p>}
+        >
           <input
             className="rounded-md bg-mirage-700 p-1"
             type="password"
-            placeholder="sk-..."
+            placeholder="user/models/**.bin"
             name="apiKey"
             id="apiKey"
             defaultValue={apiKey ?? ""}
           />
         </SettingItem>
-        <SettingItem label="ChatModel" labelFor="model">
-          <select
-            className="rounded-md bg-mirage-700 p-1"
-            name="model"
-            id="model"
-            defaultValue={model}
-          >
-            {Object.entries(CHATGPT_MODELS).map(([key, value]) => {
-              return (
-                <option key={key} value={key}>
-                  {value.label}
-                </option>
-              );
-            })}
-          </select>
-        </SettingItem>
         <SettingItem
-          label="Chat Preamble"
+          label="System Context"
           labelFor="preamble"
           help={
             <p>
-              This is the preamble that will be send to ChatGPT as a system
-              message. You can use this to set the context of the conversation
-              and alter the personality of the bot.
+              This is the preamble that will be send to your selected model as a
+              system message. You can use this to set the context of the
+              conversation and alter the personality of the bot.
             </p>
           }
         >
