@@ -1,6 +1,5 @@
 import { Middleware, configureStore } from "@reduxjs/toolkit";
 import { INITIAL_SETTINGS_STATE, settingSlice } from "./features/settings";
-import { API_KEY } from "./lib/api/openai";
 import { chatsSlice } from "./features/chat";
 import { Chat, chatSchema } from "./features/chat/types";
 import { toastSlice } from "./features/toasts";
@@ -10,7 +9,7 @@ import { getStorage } from "./lib/storage";
 const LS_STATE_KEY = "state";
 
 type LocalStorageState = {
-  settings: Omit<SettingsState, "apiKey">;
+  settings: SettingsState;
 };
 
 const stateToLocalState = (state: RootState): LocalStorageState => {
@@ -69,7 +68,7 @@ const getInitalState = async (): Promise<RootState | undefined> => {
       toasts: {
         toasts: {},
       },
-      settings: { ...localState.settings, apiKey: API_KEY },
+      settings: { ...localState.settings },
     };
 
     return result;

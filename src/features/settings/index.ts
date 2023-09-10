@@ -1,5 +1,4 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { API_KEY } from "@src/lib/api/openai";
 import { SettingsState } from "./types";
 import { getStorage } from "@src/lib/storage";
 import { ChatGPTModel } from "@src/lib/constants/openai";
@@ -10,8 +9,7 @@ const initialState: SettingsState = {
   maxTokens: 5,
   shiftSend: false,
   showPreamble: false,
-  apiKey: API_KEY,
-  model: "gpt-3.5-turbo",
+  model: null,
 };
 
 // Reducer
@@ -22,11 +20,11 @@ export const settingSlice = createSlice({
     setPreamble: (state, payload: PayloadAction<{ preamble: string }>) => {
       state.preamble = payload.payload.preamble;
     },
-    setApiKey: (state, payload: PayloadAction<{ apiKey: string }>) => {
-      state.apiKey = payload.payload.apiKey;
+    setModel: (state, payload: PayloadAction<{ model: string }>) => {
+      state.model = payload.payload.model;
 
       getStorage()
-        .setApiKey(payload.payload.apiKey)
+        .setModel(payload.payload.model)
         .catch((e: unknown) => {
           console.error(e);
         });
@@ -37,19 +35,11 @@ export const settingSlice = createSlice({
     setShowPreamble: (state, payload: PayloadAction<{ show: boolean }>) => {
       state.showPreamble = payload.payload.show;
     },
-    setModel: (state, payload: PayloadAction<{ model: ChatGPTModel }>) => {
-      state.model = payload.payload.model;
-    },
   },
 });
 // Actions
-export const {
-  setPreamble,
-  setApiKey,
-  setShiftKey,
-  setShowPreamble,
-  setModel,
-} = settingSlice.actions;
+export const { setPreamble, setModel, setShiftKey, setShowPreamble } =
+  settingSlice.actions;
 
 export const dialogueReducer = settingSlice.reducer;
 

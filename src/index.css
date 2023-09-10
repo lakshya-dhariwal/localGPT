@@ -41,3 +41,7 @@ ul {
 * {
   @apply focus:outline-green-700;
 }
+
+input::file-selector-button {
+  @apply mx-2 rounded-full border-[1px] border-mirage-800 bg-brand text-mirage-800 drop-shadow-none;
+}

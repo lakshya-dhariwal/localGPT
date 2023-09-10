@@ -1,4 +1,4 @@
-import { shell } from "electron";
+import electron from "electron";
 
 export function capitalizeFirstLetter(str: string) {
   return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
@@ -20,5 +20,6 @@ export function findObjectById(id: string, array: any[]) {
 }
 
 export function downloadFileInBrowser(url?: string) {
-  if (url) shell.openExternal(url); // Opens the URL in the user's default browser
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
+  if (url) require("electron").shell.openExternal(url); // Opens the URL in the user's default browser
 }

@@ -6,7 +6,6 @@ import { HiDownload } from "react-icons/hi";
 import { IconButton } from "../components/IconButton";
 import { Button } from "@src/components/Button";
 import {
-  setApiKey,
   setModel,
   setPreamble,
   setShiftKey,
@@ -61,29 +60,28 @@ export function SettingsPage() {
   const dispatch = useAppDispatch();
 
   const preamble = useAppSelector((state) => state.settings.preamble);
-  const apiKey = useAppSelector((state) => state.settings.apiKey);
+  const model = useAppSelector((state) => state.settings.model);
   const shiftSend = useAppSelector((state) => state.settings.shiftSend);
   const showPreambleMessage = useAppSelector(
     (state) => state.settings.showPreamble
   );
-  const model = useAppSelector((state) => state.settings.model);
 
   const navigate = useNavigate();
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: any) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
 
     const preambleForm = formData.get("preamble");
-    const apiKeyForm = formData.get("apiKey");
+    const modelForm = e.currentTarget.elements.model.value;
     const shiftSendForm = formData.get("shiftSend");
     const showPreambleMessageForm = formData.get("preamble-message");
 
     if (preambleForm) {
       dispatch(setPreamble({ preamble: preambleForm.toString() }));
     }
-    if (apiKeyForm) {
-      dispatch(setApiKey({ apiKey: apiKeyForm.toString() }));
+    if (modelForm) {
+      dispatch(setModel({ model: modelForm }));
     }
 
     dispatch(
@@ -95,14 +93,6 @@ export function SettingsPage() {
     dispatch(
       setShowPreamble({
         show: showPreambleMessageForm?.toString() === "on" ? true : false,
-      })
-    );
-
-    dispatch(
-      setModel({
-        model:
-          (formData.get("model")?.toString() as ChatGPTModel) ??
-          Object.values(CHATGPT_MODELS)[0],
       })
     );
 
@@ -139,17 +129,20 @@ export function SettingsPage() {
       </div>
       <form onSubmit={handleSubmit} className="mx-auto">
         <SettingItem
-          label="Model file location"
-          labelFor="modelLocation"
-          help={<p>Set the downloaded model file local location here</p>}
+          label="Model file"
+          labelFor="modelFile"
+          help={
+            <p>Set the downloaded GGML based model file local location here</p>
+          }
         >
           <input
             className="rounded-md bg-mirage-700 p-1"
-            type="password"
+            type="file"
             placeholder="user/models/**.bin"
-            name="apiKey"
-            id="apiKey"
-            defaultValue={apiKey ?? ""}
+            name="model"
+            id="model"
+            accept=".bin"
+            defaultValue={""}
           />
         </SettingItem>
         <SettingItem

@@ -2,7 +2,6 @@ import React from "react";
 import { IModel } from "@src/types";
 import { HiDownload } from "react-icons/hi";
 import { Button } from "./Button";
-import { shell } from "electron";
 import { downloadFileInBrowser } from "@src/lib/util";
 
 export const ModelCard: React.FC<IModel> = (model) => {
@@ -25,10 +24,17 @@ export const ModelCard: React.FC<IModel> = (model) => {
       </div>
       <p className="mb-2 text-[12px] text-mirage-200">{model.description}</p>
 
-      <Button onClick={() => downloadFileInBrowser(model.downloadURL)}>
-        <HiDownload className="mr-1" />
-        Download
-      </Button>
+      <a
+        target="_blank"
+        rel="noopener noreferrer"
+        href={model.downloadURL}
+        className="w-full"
+      >
+        <Button className="w-full">
+          <HiDownload className="mr-1" />
+          Download
+        </Button>
+      </a>
     </div>
   );
 };

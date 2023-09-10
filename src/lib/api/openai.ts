@@ -10,7 +10,6 @@ import { encode } from "./gpt-encoder";
 import { ChatMessage, SYSTEM } from "@src/features/chat/types";
 import { getStorage } from "../storage";
 
-export const API_KEY = await getStorage().getApiKey();
 
 export class ChatCompletionError extends Error {
   response: Response;

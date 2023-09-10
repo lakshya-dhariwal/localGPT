@@ -32,8 +32,8 @@ function ToastComponent({
 
   const toastClasses = classNames(
     {
-      "bg-green-700": type === "success",
-      "bg-red-700": type === "error",
+      "bg-brand ": type === "success",
+      "bg-red-500": type === "error",
       "bg-yellow-800": type === "warning",
       "bg-blue-700": type === "info",
     },
@@ -42,9 +42,8 @@ function ToastComponent({
 
   const closeClasses = classNames(
     {
-      "bg-green-700  hover:bg-green-800 active:bg-green-900":
-        type === "success",
-      "bg-red-700  hover:bg-red-800 active:bg-red-900": type === "error",
+      "bg-brand cursor-pointer active:bg-green-900": type === "success",
+      "bg-red-500  hover:bg-red-800 active:bg-red-900": type === "error",
       "bg-yellow-800  hover:bg-yellow-900 active:bg-yellow-900":
         type === "warning",
       "bg-blue-700 hover:bg-blue-800 active:bg-blue-900": type === "info",
