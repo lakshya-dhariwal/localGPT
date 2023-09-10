@@ -67,7 +67,7 @@ export function SettingsPage() {
   );
 
   const navigate = useNavigate();
-
+  console.log({ model });
   const handleSubmit = (e: any) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
@@ -135,15 +135,16 @@ export function SettingsPage() {
             <p>Set the downloaded GGML based model file local location here</p>
           }
         >
-          <input
-            className="rounded-md bg-mirage-700 p-1"
-            type="file"
-            placeholder="user/models/**.bin"
-            name="model"
-            id="model"
-            accept=".bin"
-            defaultValue={""}
-          />
+          <label htmlFor="model" className="rounded-md bg-mirage-700 p-1 px-2">
+            <span>{typeof model === "string" ? model : "No File Chosen"}</span>
+            <input
+              name="model"
+              id="model"
+              accept=".bin"
+              type="file"
+              className="hidden"
+            />
+          </label>
         </SettingItem>
         <SettingItem
           label="System Context"

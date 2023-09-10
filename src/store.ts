@@ -13,6 +13,7 @@ type LocalStorageState = {
 };
 
 const stateToLocalState = (state: RootState): LocalStorageState => {
+  console.log({ state });
   return {
     settings: {
       maxTokens: state.settings.maxTokens,

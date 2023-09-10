@@ -10,7 +10,6 @@ import { encode } from "./gpt-encoder";
 import { ChatMessage, SYSTEM } from "@src/features/chat/types";
 import { getStorage } from "../storage";
 
-
 export class ChatCompletionError extends Error {
   response: Response;
 

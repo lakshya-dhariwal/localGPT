@@ -9,7 +9,7 @@ export abstract class Storage {
 }
 
 class LocalStorage extends Storage {
-  MODEL_KEY = "model_key";
+  MODEL_KEY = "model";
   CHATS_KEY_PREFIX = "chat_";
 
   storeChat(chat: Chat): Promise<void> {

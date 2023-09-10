@@ -1,7 +1,5 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { SettingsState } from "./types";
-import { getStorage } from "@src/lib/storage";
-import { ChatGPTModel } from "@src/lib/constants/openai";
 
 const initialState: SettingsState = {
   preamble:
@@ -22,12 +20,6 @@ export const settingSlice = createSlice({
     },
     setModel: (state, payload: PayloadAction<{ model: string }>) => {
       state.model = payload.payload.model;
-
-      getStorage()
-        .setModel(payload.payload.model)
-        .catch((e: unknown) => {
-          console.error(e);
-        });
     },
     setShiftKey: (state, payload: PayloadAction<{ shiftSend: boolean }>) => {
       state.shiftSend = payload.payload.shiftSend;
