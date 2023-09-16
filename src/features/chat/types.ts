@@ -1,36 +1,25 @@
-import { z } from "zod";
+export type ChatRoleType = "system" | "user" | "assistant";
 
-export const SYSTEM = "system";
-export const USER = "user";
-export const ASSISTANT = "assistant";
+export type ChatMessage = {
+  id: string;
+  role: ChatRoleType;
+  content: string;
+  isPreamble?: boolean;
+  isImportant?: boolean;
+};
 
-export const roleShema = z.enum([SYSTEM, USER, ASSISTANT]);
-// Create zod schema for ChatMessage
-export const chatMessageSchema = z.object({
-  id: z.string(),
-  role: roleShema,
-  content: z.string(),
-  isPreamble: z.optional(z.boolean()),
-  isImportant: z.optional(z.boolean()),
-});
-
-export type ChatMessage = z.infer<typeof chatMessageSchema>;
-
-export const chatSchema = z.object({
-  id: z.string(),
-  summary: z.string(),
-  botTyping: z.boolean(),
-  botTypingMessage: z.nullable(
-    z.object({
-      role: z.optional(roleShema),
-      content: z.optional(z.string()),
-    })
-  ),
-  draft: z.string(),
-  history: z.record(chatMessageSchema),
-});
-
-export type Chat = z.infer<typeof chatSchema>;
+export type Chat = {
+  id: string;
+  summary: string;
+  botTyping: boolean;
+  botTypingMessage: {
+    role?: ChatRoleType;
+    content?: string;
+  } | null;
+  draft: string;
+  //Record(chatMessageSchema)
+  history: Record<string, ChatMessage>;
+};
 
 export type ChatState = {
   activeId: string | null;

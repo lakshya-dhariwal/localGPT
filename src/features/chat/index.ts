@@ -1,9 +1,12 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { ChatCompletionRequestMessage } from "openai";
 import { v4 as uuid } from "uuid";
-import { PartialChatCompletionChunk } from "@src/lib/api/openai";
-import { Chat, ChatState, NEW_CHAT_DEFAULT, SYSTEM } from "./types";
-import { fetchSummary, streamCompletion } from "./thunks";
+import {
+  Chat,
+  ChatMessage,
+  ChatRoleType,
+  ChatState,
+  NEW_CHAT_DEFAULT,
+} from "./types";
 import { getStorage } from "@src/lib/storage";
 
 export const saveChatFile = (chat: Chat) => {
@@ -46,7 +49,7 @@ export const chatsSlice = createSlice({
         history: {
           [messageId]: {
             content: payload.payload.preamble,
-            role: SYSTEM,
+            role: "system",
             id: messageId,
             isPreamble: true,
           },
@@ -72,24 +75,25 @@ export const chatsSlice = createSlice({
       state,
       payload: PayloadAction<{
         chatId: string;
-        segment: ChatCompletionRequestMessage;
+        role: ChatRoleType;
+        content: string;
       }>
     ) => {
-      const { chatId, segment } = payload.payload;
+      const { chatId, content, role } = payload.payload;
       const messageId = uuid();
       state.chats[chatId].history[messageId] = {
-        ...segment,
         id: messageId,
+        role,
+        content,
         isPreamble: false,
       };
-
       saveChatFile(state.chats[chatId]);
     },
     typeCompletionMessage: (
       state,
       payload: PayloadAction<{
         id: string;
-        message: PartialChatCompletionChunk;
+        message: ChatMessage;
       }>
     ) => {
       const { id, message } = payload.payload;
@@ -168,56 +172,6 @@ export const chatsSlice = createSlice({
 
       saveChatFile(state.chats[id]);
     },
-  },
-  extraReducers: (builder) => {
-    builder.addCase(fetchSummary.fulfilled, (state, action) => {
-      const id = action.meta.arg;
-      const summary = action.payload;
-
-      state.chats[id].summary = summary;
-    });
-
-    builder.addCase(streamCompletion.rejected, (state, action) => {
-      const id = action.meta.arg;
-      state.chats[id].botTyping = false;
-
-      state.chats[id].botTypingMessage = {
-        content: undefined,
-        role: undefined,
-      };
-    });
-
-    builder.addCase(streamCompletion.pending, (state, action) => {
-      const id = action.meta.arg;
-      state.chats[id].botTyping = true;
-    });
-
-    builder.addCase(streamCompletion.fulfilled, (state, action) => {
-      const id = action.meta.arg;
-      state.chats[id].botTyping = false;
-      const resultContent = state.chats[id].botTypingMessage?.content;
-      const resultRole = state.chats[id].botTypingMessage?.role;
-
-      if (!resultContent || !resultRole) {
-        return;
-      }
-
-      const messageId = uuid();
-
-      state.chats[id].history[messageId] = {
-        id: messageId,
-        content: resultContent,
-        role: resultRole,
-        isPreamble: false,
-      };
-
-      state.chats[id].botTypingMessage = {
-        content: undefined,
-        role: undefined,
-      };
-
-      saveChatFile(state.chats[id]);
-    });
   },
 });
 

@@ -1,13 +1,11 @@
 import { capitalizeFirstLetter } from "@src/lib/util";
-import { ChatCompletionResponseMessageRoleEnum } from "openai";
 import { useCallback, ChangeEvent, useState, FormEvent } from "react";
-import { IconButton } from "../IconButton";
-
 import { FiSend } from "react-icons/fi";
 import { useAppSelector } from "@src/lib/hooks/redux";
-import { Button } from "../Button";
+import { ChatRoleType } from "@src/features/chat/types";
+
 export type ChatInputValue = {
-  role: ChatCompletionResponseMessageRoleEnum;
+  role: ChatRoleType;
   draft: string;
 };
 export type ChatInputProps = {
@@ -15,7 +13,7 @@ export type ChatInputProps = {
   onSubmit?: (values: ChatInputValue) => void;
   disabled?: boolean;
   draft?: string;
-  sendAsRole: ChatCompletionResponseMessageRoleEnum;
+  sendAsRole: ChatRoleType;
 };
 
 export function ChatInput({
@@ -42,7 +40,7 @@ export function ChatInput({
       onChange &&
         onChange({
           draft: draft ?? "",
-          role: e.target.value as ChatCompletionResponseMessageRoleEnum,
+          role: e.target.value as ChatRoleType,
         });
     },
     [onChange, draft]

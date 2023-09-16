@@ -3,11 +3,11 @@ import { Configuration, OpenAIApi } from "openai";
 import { BASE_PATH as OPENAI_BASE_PATH } from "openai/dist/base";
 
 export const getApiConfiguration = (state: RootState) => {
-  if (!state.settings.apiKey) {
-    throw new Error("API key not configured");
-  }
+  // if (!state.settings.apiKey) {
+  //   throw new Error("API key not configured");
+  // }
   return new Configuration({
-    apiKey: state.settings.apiKey,
+    apiKey: "TEST",
     basePath: OPENAI_BASE_PATH,
   });
 };

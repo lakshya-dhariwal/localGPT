@@ -1,7 +1,7 @@
 import { Middleware, configureStore } from "@reduxjs/toolkit";
 import { INITIAL_SETTINGS_STATE, settingSlice } from "./features/settings";
 import { chatsSlice } from "./features/chat";
-import { Chat, chatSchema } from "./features/chat/types";
+import { Chat } from "./features/chat/types";
 import { toastSlice } from "./features/toasts";
 import { SettingsState } from "./features/settings/types";
 import { getStorage } from "./lib/storage";
@@ -51,12 +51,7 @@ const getInitalState = async (): Promise<RootState | undefined> => {
 
     const chats: Chat[] = await getStorage().getChats();
     const chatRecord = chats.reduce<Record<string, Chat>>((acc, chat) => {
-      const parse = chatSchema.safeParse(chat);
-      if (parse.success) {
-        acc[chat.id] = parse.data;
-      } else {
-        console.error("Error parsing chat:", parse.error);
-      }
+      acc[chat.id] = chat;
 
       return acc;
     }, {});

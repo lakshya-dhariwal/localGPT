@@ -1,6 +1,5 @@
 import { useAppDispatch, useAppSelector } from "@src/lib/hooks/redux";
 
-import { ChatCompletionResponseMessageRoleEnum } from "openai";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { ChatInput, ChatInputProps } from "./ChatInput";
 import { ChatMessage } from "./ChatMessage";
@@ -10,10 +9,12 @@ import {
   editMessage,
   abortCompletion,
   setImportant,
+  pushHistory,
 } from "@src/features/chat";
-import { pushHistory, streamCompletion } from "@src/features/chat/thunks";
 import { Chat } from "@src/features/chat/types";
 import { Button } from "../Button";
+import { ChatRoleType } from "../../features/chat/types";
+import { streamCompletion } from "@src/features/chat/thunks";
 
 export type ChatViewProps = {
   chat: Chat;
@@ -22,8 +23,7 @@ export type ChatViewProps = {
 export function ChatView({ chat }: ChatViewProps) {
   const dispatch = useAppDispatch();
 
-  const [sendAsRole, setSendAsRole] =
-    useState<ChatCompletionResponseMessageRoleEnum>("user");
+  const [sendAsRole, setSendAsRole] = useState<ChatRoleType>("user");
 
   const scrollRef = useRef<HTMLDivElement>(null);
   const isScrolledToBottomRef = useRef(true);
@@ -56,11 +56,12 @@ export function ChatView({ chat }: ChatViewProps) {
     [chat, dispatch]
   );
   const handleChatSubmit = useCallback<NonNullable<ChatInputProps["onSubmit"]>>(
-    ({ draft, role }) => {
+    ({ draft, role }: { draft: string; role: ChatRoleType }) => {
       if (!chat) return;
 
-      dispatch(pushHistory({ content: draft, role: role }));
+      dispatch(pushHistory({ chatId: chat.id, content: draft, role: role }));
       dispatch(updateDraft({ id: chat.id, draft: "" }));
+      dispatch(streamCompletion(chat.id));
     },
     [chat, dispatch]
   );

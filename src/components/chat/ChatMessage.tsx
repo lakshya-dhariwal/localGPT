@@ -1,5 +1,4 @@
 import MDEditor from "@uiw/react-md-editor";
-import { ChatCompletionResponseMessageRoleEnum } from "openai";
 import { useState, useEffect } from "react";
 import { IconButton } from "../IconButton";
 import {
@@ -12,10 +11,11 @@ import {
 } from "react-icons/fi";
 import { capitalizeFirstLetter } from "@src/lib/util";
 import classNames from "classnames";
+import { ChatRoleType } from "@src/features/chat/types";
 
 export type ChatMessageProps = {
   content: string;
-  role: ChatCompletionResponseMessageRoleEnum;
+  role: ChatRoleType;
   isImportant?: boolean;
   onDelete?: () => void;
   onEdit?: (content: string) => void;
