@@ -5,6 +5,7 @@ import { IconButton } from "../IconButton";
 
 import { FiSend } from "react-icons/fi";
 import { useAppSelector } from "@src/lib/hooks/redux";
+import { Button } from "../Button";
 export type ChatInputValue = {
   role: ChatCompletionResponseMessageRoleEnum;
   draft: string;
@@ -111,34 +112,32 @@ export function ChatInput({
           ))}
         </select>
       </div>
-      <div className="pointer-events-auto relative flex  h-fit w-full max-w-4xl flex-grow flex-row  items-center justify-center rounded-md rounded-tl-none  border border-black/10 bg-white shadow-[0_0_10px_rgba(0,0,0,0.10)] dark:border-gray-900/50 dark:text-white dark:shadow-[0_0_15px_rgba(0,0,0,0.10)] ">
+      <div className="pointer-events-auto relative flex  h-fit w-full  max-w-4xl flex-grow flex-row items-center  justify-center rounded-md rounded-tl-none border  border-black/10 bg-white shadow-[0_0_10px_rgba(0,0,0,0.10)] dark:border-gray-900/50 dark:text-white dark:shadow-[0_0_15px_rgba(0,0,0,0.10)] ">
         <textarea
           name="chat-input"
           id="chat-input"
-          className="z-10  flex h-full w-full  resize-none items-center border-0 bg-transparent py-3 pl-5 text-[#343541] dark:bg-transparent"
+          className="z-10  flex h-full w-full  resize-none items-center border-0 bg-transparent py-2 pl-5 text-[#343541]  dark:bg-transparent"
           value={draft}
           onChange={handleDraftChange}
           onKeyDown={handleKeyDown}
           onInput={handleResize}
           style={{
             height: "auto",
-            minHeight: "1em",
             maxHeight: "6em",
             resize: "none",
           }}
           rows={1}
         ></textarea>
-        <div className="flex h-full items-center justify-center bg-[#97B34D] px-2">
-          <IconButton
-            disabled={disabled}
-            aria-label="Send Message"
-            className={`text- m-0 ml-2 flex h-full items-center justify-center bg-transparent p-0 shadow-sm hover:bg-transparent ${
-              disabled && "pointer-events-none cursor-not-allowed"
-            }`}
-          >
-            <FiSend size={20} />
-          </IconButton>
-        </div>
+
+        <button
+          disabled={disabled}
+          aria-label="Send Message"
+          className={`m-0  flex  items-center justify-center p-0 px-2 text-mirage-800 hover:text-mirage-400   ${
+            disabled && "pointer-events-none cursor-not-allowed"
+          }`}
+        >
+          <FiSend size={20} />
+        </button>
       </div>
     </form>
   );

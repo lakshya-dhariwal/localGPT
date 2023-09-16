@@ -12,7 +12,6 @@ import {
   setShowPreamble,
 } from "@src/features/settings";
 import { createToast } from "@src/features/toasts/thunks";
-import { CHATGPT_MODELS, ChatGPTModel } from "@src/lib/constants/openai";
 import { MODELS } from "@src/lib/constants/models";
 import { ModelCard } from "@src/components/ModelCard";
 
@@ -158,10 +157,10 @@ export function SettingsPage() {
           }
         >
           <textarea
-            className="rounded-md bg-mirage-700 p-1"
+            className="rounded-md bg-mirage-700 p-1 pl-2"
             name="preamble"
             id="preamble"
-            rows={10}
+            rows={4}
             defaultValue={preamble}
           ></textarea>
         </SettingItem>
