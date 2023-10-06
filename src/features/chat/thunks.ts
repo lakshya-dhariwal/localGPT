@@ -1,7 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { RootState } from "@src/store";
 import { chatsSlice } from ".";
-import { getApiConfiguration } from "../settings/selectors";
 import { createToast } from "../toasts/thunks";
 import { selectChat } from "./selectors";
 

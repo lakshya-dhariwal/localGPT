@@ -1,6 +1,18 @@
 import { IModel } from "@src/types";
 
-export const MODELS : IModel[] = [
+export const MODELS: IModel[] = [
+  {
+    requiredRAM: "7",
+    name: "Mistral 7B",
+    id: "Llama-7B",
+    description:
+      "The Mistral-7B-v0.1 Large Language Model (LLM) is a pretrained generative text model with 7 billion parameters. Mistral-7B-v0.1 outperforms Llama 2 13B on all benchmarks we tested.",
+    downloadURL:
+      "https://huggingface.co/TheBloke/Mistral-7B-v0.1-GGUF/resolve/main/mistral-7b-v0.1.Q4_K_M.gguf",
+    fileSize: "7",
+    image:
+      "https://www.google.com/url?sa=i&url=https%3A%2F%2Fcommons.wikimedia.org%2Fwiki%2FFile%3AMeta-Logo.png&psig=AOvVaw1lvBV3uEI20GHYpi7Mki2G&ust=1694033895184000&source=images&cd=vfe&opi=89978449&ved=0CBAQjRxqFwoTCID6y7aulIEDFQAAAAAdAAAAABAJ",
+  },
   {
     requiredRAM: "7",
     name: "Llama 7B",
