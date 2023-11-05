@@ -9,5 +9,9 @@ Current solutions require you to run LLM through terminal. This is a GUI based s
 #### To run locally
 
 > git clone https://www.github.com/lakshya-dhariwal/LocalGPT
+
+> cd LocalGPT
+
 > yarn
+
 > yarn dev
