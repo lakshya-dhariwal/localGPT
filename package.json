@@ -1,13 +1,13 @@
 {
-  "name": "my-chat-gpt",
+  "name": "local-gpt",
   "private": true,
-  "version": "0.2.1",
+  "version": "0.1",
   "main": "dist-electron/main/index.js",
   "author": {
-    "name": "Nico Krätschmer",
-    "email": "kraetschmerni@gmail.com"
+    "name": "Lakshya Dhariwal",
+    "email": "lakshyadhariwal9@gmail.com"
   },
-  "description": "An opensource ChatGPT client for Windows, Mac and Linux",
+  "description": "An opensource LLM client for Windows, Mac and Linux. Run any model locally.",
   "scripts": {
     "dev": "vite",
     "build:client": "tsc && vite build",
@@ -19,7 +19,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:Loeffeldude/self-chat-gpt.git"
+    "url": "git@github.com:lakshya-dhariwal/LocalGPT.git"
   },
   "debug": {
     "env": {
@@ -36,6 +36,7 @@
     "@uiw/react-md-editor": "^3.20.5",
     "axios": "^1.3.4",
     "classnames": "^2.3.2",
+    "dalai": "^0.3.1",
     "electron-store": "^8.1.0",
     "markdown-it": "^13.0.1",
     "react": "^18.2.0",

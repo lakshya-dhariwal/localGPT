@@ -11,6 +11,7 @@ import { join } from "node:path";
 import Store from "electron-store";
 import fs from "fs/promises";
 import type { Chat } from "../../src/features/chat/types";
+import Dalai from "dalai";
 // The built directory structure
 //
 process.env.DIST_ELECTRON = join(__dirname, "../");
@@ -37,6 +38,7 @@ const url = process.env.VITE_DEV_SERVER_URL;
 const indexHtml = join(process.env.DIST, "index.html");
 
 const store = new Store();
+// const dalai = new Dalai();
 
 async function createWindow() {
   win = new BrowserWindow({
@@ -151,6 +153,8 @@ ipcMain.handle("apikey:set", (_, key: string) => {
 
   store.set("apiKey", encrypedKey);
 });
+
+// ipcMain.handle("response", (_, messages: string[]) => {});
 
 ipcMain.handle("messagebox:confirm", (_, message: string) => {
   return new Promise((resolve) => {
